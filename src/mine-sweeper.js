@@ -23,9 +23,98 @@ const { NotImplementedError } = require('../extensions/index.js');
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function minesweeper(matrix) {
+  const lengthOfArr = matrix[0].length;
+  const finalArray = [];
+  const res = [];
+
+  for (let i = 0; i < matrix.length; i++) {
+    let arr = matrix[i];
+    let nextArr = matrix[i + 1];
+    let prevArr = matrix[i - 1];
+
+    for (let j = 0; j < arr.length; j++){
+      let counter = 0;
+      if (j === 0) {
+        if (arr[j + 1] === true) {
+          counter += 1;
+        }
+        if (prevArr !== undefined) {
+          if (prevArr[j] === true) {
+            counter += 1;
+          }
+          if (prevArr[j + 1] === true) {
+            counter += 1;
+          }
+        }
+        if (nextArr !== undefined) {
+          if (nextArr[j] === true) {
+            counter += 1;
+          }
+          if (nextArr[j + 1] === true) {
+            counter += 1;
+          }
+        }
+      }else if (j === arr.length - 1) {
+        if (arr[j - 1] === true) {
+          counter += 1;
+        }
+        if (prevArr !== undefined) {
+          if (prevArr[j] === true) {
+            counter += 1;
+          }
+          if (prevArr[j - 1] === true) {
+            counter += 1;
+          }
+        }
+        if (nextArr !== undefined) {
+          if (nextArr[j] === true) {
+            counter += 1;
+          }
+          if (nextArr[j - 1] === true) {
+            counter += 1;
+          }
+        }
+      } else {
+        if (arr[j - 1] === true) {
+          counter += 1;
+        }
+        if (arr[j + 1] === true) {
+          counter += 1;
+        }
+        if (prevArr !== undefined) {
+          if (prevArr[j] === true) {
+            counter += 1;
+          }
+          if (prevArr[j - 1] === true) {
+            counter += 1;
+          }
+          if (prevArr[j + 1] === true) {
+            counter += 1;
+          }
+        }
+        if (nextArr !== undefined) {
+          if (nextArr[j] === true) {
+            counter += 1;
+          }
+          if (nextArr[j - 1] === true) {
+            counter += 1;
+          }
+          if (nextArr[j + 1] === true) {
+            counter += 1;
+          }
+        }
+      }
+      finalArray.push(counter);
+    }
+  }
+
+  for (let i = 0; i < finalArray.length; i += lengthOfArr) {
+    const chunk = finalArray.slice(i, i + lengthOfArr);
+    res.push(chunk)
+  }
+  return res;
+
 }
 
 module.exports = {
