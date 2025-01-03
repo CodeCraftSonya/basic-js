@@ -56,7 +56,7 @@ function DecodeByCharacters(wordFrom,wordEncoded){
       continue;
     }
 
-    let indexChar = CalculateCharPos(wordEncoded, i- notCharCounter);
+    let indexChar = CalculateCharPos(wordEncoded, i - notCharCounter);
     const shift = wordEncoded.charCodeAt(indexChar) - 'a'.charCodeAt();
     let charCodeWithShift = wordFrom.charCodeAt(i) - shift;
 
@@ -115,7 +115,8 @@ class VigenereCipheringMachine {
       throw new Error('Incorrect arguments!')
     } else {
       let messageToLowercase = encryptedMessage.toLowerCase();
-      let decodedResult = DecodeByCharacters(messageToLowercase, key);
+      let keyToLC = key.toLowerCase();
+      let decodedResult = DecodeByCharacters(messageToLowercase, keyToLC);
 
       if (!this.isDirect) {
         decodedResult = decodedResult.split('').reverse().join('');
